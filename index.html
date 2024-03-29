@@ -34,9 +34,58 @@ max="255" step="1">R</input><br>
     <input type="range" value="0" id="G" min="0"
 max="255">G</input><br>
     <input type="range" value="0" id="B" min="0"
-max="255">B</input></center>
+max="255">B</input>
+    <div id="time">00:00:00.000</div>
+    <div id="buttons">
+      <input id="start" type="button" value="start">
+      <input id="stop" type="button" value="stop">
+      <input id="reset" type="button" value="reset">
+    </div></center>
     <script type="text/javascript">
       clockID = setInterval("clock()",1);
+      var time = document.getElementById('time');
+      var startButton = document.getElementById('start');
+      var stopButton = document.getElementById('stop');
+      var resetButton = document.getElementById('reset');
+
+      var startTime;
+      var stopTime = 0;
+      var timeoutID;
+
+      function displayTime() {
+        const currentTime = new Date(Date.now() - startTime + stopTime);
+        const h = String(currentTime.getHours()-1).padStart(2, '0');
+        const m = String(currentTime.getMinutes()).padStart(2, '0');
+        const s = String(currentTime.getSeconds()).padStart(2, '0');
+        const ms = String(currentTime.getMilliseconds()).padStart(3, '0');
+
+        time.textContent = `${h}:${m}:${s}.${ms}`;
+        timeoutID = setTimeout(displayTime, 10);
+      }
+
+      startButton.addEventListener('click', () => {
+        startButton.disabled = true;
+        stopButton.disabled = false;
+        resetButton.disabled = true;
+        startTime = Date.now();
+        displayTime();
+      });
+
+      stopButton.addEventListener('click', function() {
+        startButton.disabled = false;
+        stopButton.disabled = true;
+        resetButton.disabled = false;
+        clearTimeout(timeoutID);
+        stopTime += (Date.now() - startTime);
+      });
+
+      resetButton.addEventListener('click', function() {
+        startButton.disabled = false;
+        stopButton.disabled = true;
+        resetButton.disabled = true;
+        time.textContent = '00:00:00.000';
+        stopTime = 0;
+      });
       function clock() {
         document.getElementById("view_clock").innerHTML = getNow();
       };
