@@ -43,14 +43,14 @@ max="255">B</input>
     </div></center>
     <script type="text/javascript">
       clockID = setInterval("clock()",1);
-      var time = document.getElementById('time');
-      var startButton = document.getElementById('start');
-      var stopButton = document.getElementById('stop');
-      var resetButton = document.getElementById('reset');
+      const time = document.getElementById('time');
+      const startButton = document.getElementById('start');
+      const stopButton = document.getElementById('stop');
+      const resetButton = document.getElementById('reset');
 
-      var startTime;
-      var stopTime = 0;
-      var timeoutID;
+      let startTime;
+      let stopTime = 0;
+      let timeoutID;
 
       function displayTime() {
         const currentTime = new Date(Date.now() - startTime + stopTime);
