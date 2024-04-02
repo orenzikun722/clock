@@ -35,15 +35,11 @@ max="255" step="1">R</input><br>
 max="255">G</input><br>
     <input type="range" value="0" id="B" min="0"
 max="255">B</input>
-    <div id="time">00:00:00.000</div>
-    <div id="buttons">
-      <input id="start" type="button" value="start">
-      <input id="stop" type="button" value="stop">
-      <input id="reset" type="button" value="reset">
-    </div><button onclick="changeDisplay()">詳細</button>
+    <button onclick="changeDisplay()">詳細</button>
     <p id="info">デバイスの時間をJavaScriptで取得し、htmlで表示しています。デバイスの時間を利用しているためインターネットから直接時間を取得しているわけではありません。デバイスの時間を変更するとこの時計が表示する時間も変わります</p></center>
     <script type="text/javascript">
       clockID = setInterval("clock()",1);
+      changeDisplay();
       function changeDisplay() {
         var element = document.getElementById('info');
         if (element.style.display == 'none') {
