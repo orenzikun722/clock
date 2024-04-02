@@ -40,53 +40,18 @@ max="255">B</input>
       <input id="start" type="button" value="start">
       <input id="stop" type="button" value="stop">
       <input id="reset" type="button" value="reset">
-    </div></center>
+    </div><button onclick="changeDisplay()">詳細</button>
+    <p id="info">デバイスの時間をJavaScriptで取得し、htmlで表示しています。デバイスの時間を利用しているためインターネットから直接時間を取得しているわけではありません。デバイスの時間を変更するとこの時計が表示する時間も変わります</p></center>
     <script type="text/javascript">
       clockID = setInterval("clock()",1);
-      document.getElementById('stop').disabled = true;
-      const time = document.getElementById('time');
-      const startButton = document.getElementById('start');
-      const stopButton = document.getElementById('stop');
-      const resetButton = document.getElementById('reset');
-
-      let startTime;
-      let stopTime = 0;
-      let timeoutID;
-
-      function displayTime() {
-        const currentTime = new Date(Date.now() - startTime + stopTime);
-        const h = String(currentTime.getHours()-1).padStart(2, '0');
-        const m = String(currentTime.getMinutes()).padStart(2, '0');
-        const s = String(currentTime.getSeconds()).padStart(2, '0');
-        const ms = String(currentTime.getMilliseconds()).padStart(3, '0');
-
-        time.textContent = `${h}:${m}:${s}.${ms}`;
-        timeoutID = setTimeout(displayTime, 10);
-      }
-
-      startButton.addEventListener('click', () => {
-        startButton.disabled = true;
-        stopButton.disabled = false;
-        resetButton.disabled = true;
-        startTime = Date.now();
-        displayTime();
-      });
-
-      stopButton.addEventListener('click', function() {
-        startButton.disabled = false;
-        stopButton.disabled = true;
-        resetButton.disabled = false;
-        clearTimeout(timeoutID);
-        stopTime += (Date.now() - startTime);
-      });
-
-      resetButton.addEventListener('click', function() {
-        startButton.disabled = false;
-        stopButton.disabled = true;
-        resetButton.disabled = true;
-        time.textContent = '00:00:00.000';
-        stopTime = 0;
-      });
+      function changeDisplay() {
+        var element = document.getElementById('info');
+        if (element.style.display == 'none') {
+          element.style.display = 'block'; 
+        } else {
+          element.style.display = 'none';
+        }
+      };
       function clock() {
         document.getElementById("view_clock").innerHTML = getNow();
       };
