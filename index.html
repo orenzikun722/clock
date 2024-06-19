@@ -29,13 +29,14 @@
       <option value="1">日付のみ</option>
       <option value="2">時刻のみ</option>
     </select>
-    <button onclick="openFullscreen()" class="notation">全画面表示</button><input type="checkbox" id="notation" checked>12時間表記</input>
+    <button onclick="openFullscreen()" class="notation">全画面表示</button><input type="checkbox" id="notation" checked>12時間表記</input><br>
     <input type="range" value="0" id="R" min="0"
 max="255" step="1">R</input><br>
     <input type="range" value="0" id="G" min="0"
 max="255">G</input><br>
     <input type="range" value="0" id="B" min="0"
 max="255">B</input><br>
+      <p id="caveat"></p>
       <script type="text/javascript">
       clockID = setInterval("clock()",1);
       function clock() {
@@ -47,6 +48,13 @@ max="255">B</input><br>
         var R = document.getElementById('R').value;
         var G = document.getElementById('G').value;
         var B = document.getElementById('B').value;
+        if(R < 10 && G < 10 && B < 10){
+          document.getElementById('caveat').textContent = "背景と色が同化する可能性があります。";
+        }else if(R > 245 && G > 245 && B > 245){
+          document.getElementById('caveat').textContent = "背景と色が同化する可能性があります。";
+        }else{
+          document.getElementById('caveat').textContent = "";
+        }
         document.getElementById("color").setAttribute("style", "color: rgb(" + R + ", " + G + ", " + B + ")");
         var notation = document.getElementById('notation').checked;
         var now = new Date();
