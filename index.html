@@ -37,6 +37,7 @@ max="255">G</input><br>
     <input type="range" value="0" id="B" min="0"
 max="255">B</input><br>
       <p id="caveat"></p>
+      <noscript>Javascriptを有効化してください。</noscript>
       <script type="text/javascript">
       clockID = setInterval("clock()",1);
       function clock() {
@@ -49,9 +50,9 @@ max="255">B</input><br>
         var G = document.getElementById('G').value;
         var B = document.getElementById('B').value;
         if(R < 10 && G < 10 && B < 10){
-          document.getElementById('caveat').textContent = "背景と色が同化する可能性があります。";
+          document.getElementById('caveat').textContent = "全画面表示にすると背景と色が同化する可能性があります。";
         }else if(R > 245 && G > 245 && B > 245){
-          document.getElementById('caveat').textContent = "背景と色が同化する可能性があります。";
+          document.getElementById('caveat').textContent = "全画面表示にすると背景と色が同化する可能性があります。";
         }else{
           document.getElementById('caveat').textContent = "";
         }
